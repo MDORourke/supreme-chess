@@ -148,6 +148,9 @@ lib /NOLOGO /OUT:"$(SolutionDir)SupremeChessTests\lib\SupremeChess.lib" "$(Proje
     <ClInclude Include="include\PieceComponent.h" />
     <ClInclude Include="include\Vec2D.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
