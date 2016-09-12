@@ -154,10 +154,10 @@ bool Grid::isLegalMove(Vec2D from, Vec2D to, PieceComponent component) {
 	// Switch on type of piece
 	switch (component.getPieceType()) {
 	case PieceComponent::PieceType::BISHOP:
-		return std::abs((to.x - from.x) / (to.y - from.y)) == 1;
+		return to.y - from.y != 0 && std::abs((to.x - from.x) / (to.y - from.y)) == 1;
 		break;
 	case PieceComponent::PieceType::KING:
-		return (std::abs(from.x - to.x) == 1 && std::abs(from.y - to.y) == 0) || (std::abs(from.y - to.y) == 1 & std::abs(from.x - to.y) == 0);
+		return (std::abs(from.x - to.x) == 1 && std::abs(from.y - to.y) == 0) || (std::abs(from.y - to.y) == 1 & std::abs(from.x - to.x) == 0);
 		break;
 	case PieceComponent::PieceType::KNIGHT:
 		return (std::abs(from.x - to.x) == 2 && std::abs(from.y - to.y) == 1) || (std::abs(from.x - to.x) == 1 && std::abs(from.y - to.y) == 2);
@@ -217,26 +217,23 @@ bool Grid::isLegalTake(Vec2D from, Vec2D to, PieceComponent component) {
 	// Switch on type of piece
 	switch (component.getPieceType()) {
 	case PieceComponent::PieceType::BISHOP:
-		return std::abs((to.x - from.x) / (to.y - from.y)) == 1;
-		break;
 	case PieceComponent::PieceType::KING:
-		return std::abs(from.x - to.x) == 1 || std::abs(to.x - from.x) == 1;
-		break;
 	case PieceComponent::PieceType::KNIGHT:
-		return (std::abs(from.x - to.x) == 3 && std::abs(from.y - to.y) == 1) || (std::abs(from.x - to.x) == 1 && std::abs(from.y - to.y) == 3);
+	case PieceComponent::PieceType::ROOK:
+		return isLegalMove(from, to, component);
 		break;
 	case PieceComponent::PieceType::PAWN:
-		{
-			int allowedDiff;
-			if (component.getPlayerType() == PieceComponent::WHITE) {
-				allowedDiff = 1;
-			}
-			else {
-				allowedDiff = -1;
-			}
-			return std::abs(from.x - to.x) == 1 && from.y - to.y == allowedDiff;
+	{
+		int allowedDiff;
+		if (component.getPlayerType() == PieceComponent::WHITE) {
+			allowedDiff = 1;
 		}
-		break;
+		else {
+			allowedDiff = -1;
+		}
+		return std::abs(from.x - to.x) == 1 && from.y - to.y == allowedDiff;
+	}
+	break;
 	case PieceComponent::PieceType::QUEEN:
 		// A few cases here
 		component.setPieceType(PieceComponent::PieceType::BISHOP);
@@ -249,11 +246,7 @@ bool Grid::isLegalTake(Vec2D from, Vec2D to, PieceComponent component) {
 		}
 		return false;
 		break;
-	case PieceComponent::PieceType::ROOK:
-		return from.x - to.x == 0 || from.y - to.y == 0;
-		break;
 	}
-
 }
 
 void Grid::selectGrid(Vec2D position) {
