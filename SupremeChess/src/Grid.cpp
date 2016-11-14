@@ -247,6 +247,8 @@ bool Grid::isLegalTake(Vec2D from, Vec2D to, PieceComponent component) {
 		return false;
 		break;
 	}
+
+	return false;
 }
 
 void Grid::selectGrid(Vec2D position) {

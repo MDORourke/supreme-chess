@@ -9,7 +9,7 @@ class Grid;
 */
 class GridSelectionState {
 
-private:
+public:
 	enum State {
 		NONE,
 		SELECTED,
@@ -18,6 +18,7 @@ private:
 		TURN_ENDED
 	};
 
+private:
 	State _currentState;
 
 	Grid* _grid;

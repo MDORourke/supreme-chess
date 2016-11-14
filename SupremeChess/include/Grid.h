@@ -30,7 +30,7 @@ private:
 public:
 
 	Grid(int numRows, int numCols);
-	~Grid();
+	virtual ~Grid();
 
 	Vec2D getGridSquareFromPosition(Vec2D position) const;
 	Vec2D getPositionFromGridSquare(Vec2D gridSquare) const;
@@ -41,15 +41,15 @@ public:
 	PieceComponent::PlayerType getCurrentPlayer() const { return _currentPlayer; }
 	Entity* getGridSquare(Vec2D index) const;
 	Entity* getChessPiece(Vec2D index) const;
-	Entity* getSelectedSquare() const { return _selectedGridSquare; }
-	Entity* getTargetSquare() const { return _targetGridSquare; }
+	virtual Entity* getSelectedSquare() const { return _selectedGridSquare; }
+	virtual Entity* getTargetSquare() const { return _targetGridSquare; }
 
-	void setSelectedSquare(Entity* entity) { _selectedGridSquare = entity; }
-	void setTargetSquare(Entity* entity) { _targetGridSquare = entity; }
+	virtual void setSelectedSquare(Entity* entity) { _selectedGridSquare = entity; }
+	virtual void setTargetSquare(Entity* entity) { _targetGridSquare = entity; }
 
 	void addChessPiece(Entity* piece, Vec2D index);
-	void moveChessPiece(Vec2D from, Vec2D to);
-	void takeChessPiece(Vec2D pieceToTake);
+	virtual void moveChessPiece(Vec2D from, Vec2D to);
+	virtual void takeChessPiece(Vec2D pieceToTake);
 
 	inline bool indexIsInBounds(Vec2D index) const { return index.x <= _numRows && index.y <= _numCols; }
 	bool isLegalMove(Vec2D from, Vec2D to);
@@ -59,7 +59,7 @@ public:
 
 	void selectGrid(Vec2D position);
 	void resolvePositions();
-	void endTurn();
+	virtual void endTurn();
 
 };
 

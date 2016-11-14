@@ -7,6 +7,8 @@
 #include "PieceComponent.h"
 #include "Entity.h"
 
+#include "Game.h"
+
 using namespace std;
 
 const char* CHESSBOARD = "chessboard";
@@ -80,127 +82,133 @@ Entity* createEntityOnGrid(const char* name, Grid* grid, Vec2D index, PieceCompo
  */
 int main(int argc, char** argv) {
 
-    GraphicsSystem* _graphics = new GraphicsSystem("Supreme Chess", 400, 400);
+ //   GraphicsSystem* _graphics = new GraphicsSystem("Supreme Chess", 400, 400);
 
-    _graphics->showWindow();
+ //   _graphics->showWindow();
 
-    _graphics->loadSprite(CHESSBOARD, "res/chessboard.png");
-	_graphics->loadSprite(CHESSBOARD_WHITE, "res/chessboard_white.png");
-	_graphics->loadSprite(CHESSBOARD_BLACK, "res/chessboard_black.png");
+ //   _graphics->loadSprite(CHESSBOARD, "res/chessboard.png");
+	//_graphics->loadSprite(CHESSBOARD_WHITE, "res/chessboard_white.png");
+	//_graphics->loadSprite(CHESSBOARD_BLACK, "res/chessboard_black.png");
 
-    GraphicsSystem::SpriteProperties spriteProps;
-    spriteProps = loadSprites();
-    _graphics->loadSpritesheet(spriteProps, "res/chess_pieces_small.png");
-	_graphics->loadSprite(BORDER, "res/border.png");
+ //   GraphicsSystem::SpriteProperties spriteProps;
+ //   spriteProps = loadSprites();
+ //   _graphics->loadSpritesheet(spriteProps, "res/chess_pieces_small.png");
+	//_graphics->loadSprite(BORDER, "res/border.png");
 
-	Grid grid(8, 8);
+	//Grid grid(8, 8);
 
-	_entities.push_back(createEntityOnGrid(BLACK_ROOK, &grid, Vec2D(0, 0), PieceComponent::PieceType::ROOK, PieceComponent::PlayerType::BLACK));
-	_entities.push_back(createEntityOnGrid(BLACK_KNIGHT, &grid, Vec2D(1, 0), PieceComponent::PieceType::KNIGHT, PieceComponent::PlayerType::BLACK));
-	_entities.push_back(createEntityOnGrid(BLACK_BISHOP, &grid, Vec2D(2, 0), PieceComponent::PieceType::BISHOP, PieceComponent::PlayerType::BLACK));
-	_entities.push_back(createEntityOnGrid(BLACK_KING, &grid, Vec2D(3, 0), PieceComponent::PieceType::KING, PieceComponent::PlayerType::BLACK));
-	_entities.push_back(createEntityOnGrid(BLACK_QUEEN, &grid, Vec2D(4, 0), PieceComponent::PieceType::QUEEN, PieceComponent::PlayerType::BLACK));
-	_entities.push_back(createEntityOnGrid(BLACK_BISHOP, &grid, Vec2D(5, 0), PieceComponent::PieceType::BISHOP, PieceComponent::PlayerType::BLACK));
-	_entities.push_back(createEntityOnGrid(BLACK_KNIGHT, &grid, Vec2D(6, 0), PieceComponent::PieceType::KNIGHT, PieceComponent::PlayerType::BLACK));
-	_entities.push_back(createEntityOnGrid(BLACK_ROOK, &grid, Vec2D(7, 0), PieceComponent::PieceType::ROOK, PieceComponent::PlayerType::BLACK));
+	//_entities.push_back(createEntityOnGrid(BLACK_ROOK, &grid, Vec2D(0, 0), PieceComponent::PieceType::ROOK, PieceComponent::PlayerType::BLACK));
+	//_entities.push_back(createEntityOnGrid(BLACK_KNIGHT, &grid, Vec2D(1, 0), PieceComponent::PieceType::KNIGHT, PieceComponent::PlayerType::BLACK));
+	//_entities.push_back(createEntityOnGrid(BLACK_BISHOP, &grid, Vec2D(2, 0), PieceComponent::PieceType::BISHOP, PieceComponent::PlayerType::BLACK));
+	//_entities.push_back(createEntityOnGrid(BLACK_KING, &grid, Vec2D(3, 0), PieceComponent::PieceType::KING, PieceComponent::PlayerType::BLACK));
+	//_entities.push_back(createEntityOnGrid(BLACK_QUEEN, &grid, Vec2D(4, 0), PieceComponent::PieceType::QUEEN, PieceComponent::PlayerType::BLACK));
+	//_entities.push_back(createEntityOnGrid(BLACK_BISHOP, &grid, Vec2D(5, 0), PieceComponent::PieceType::BISHOP, PieceComponent::PlayerType::BLACK));
+	//_entities.push_back(createEntityOnGrid(BLACK_KNIGHT, &grid, Vec2D(6, 0), PieceComponent::PieceType::KNIGHT, PieceComponent::PlayerType::BLACK));
+	//_entities.push_back(createEntityOnGrid(BLACK_ROOK, &grid, Vec2D(7, 0), PieceComponent::PieceType::ROOK, PieceComponent::PlayerType::BLACK));
 
-	_entities.push_back(createEntityOnGrid(BLACK_PAWN, &grid, Vec2D(0, 1), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::BLACK));
-	_entities.push_back(createEntityOnGrid(BLACK_PAWN, &grid, Vec2D(1, 1), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::BLACK));
-	_entities.push_back(createEntityOnGrid(BLACK_PAWN, &grid, Vec2D(2, 1), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::BLACK));
-	_entities.push_back(createEntityOnGrid(BLACK_PAWN, &grid, Vec2D(3, 1), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::BLACK));
-	_entities.push_back(createEntityOnGrid(BLACK_PAWN, &grid, Vec2D(4, 1), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::BLACK));
-	_entities.push_back(createEntityOnGrid(BLACK_PAWN, &grid, Vec2D(5, 1), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::BLACK));
-	_entities.push_back(createEntityOnGrid(BLACK_PAWN, &grid, Vec2D(6, 1), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::BLACK));
-	_entities.push_back(createEntityOnGrid(BLACK_PAWN, &grid, Vec2D(7, 1), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::BLACK));
+	//_entities.push_back(createEntityOnGrid(BLACK_PAWN, &grid, Vec2D(0, 1), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::BLACK));
+	//_entities.push_back(createEntityOnGrid(BLACK_PAWN, &grid, Vec2D(1, 1), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::BLACK));
+	//_entities.push_back(createEntityOnGrid(BLACK_PAWN, &grid, Vec2D(2, 1), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::BLACK));
+	//_entities.push_back(createEntityOnGrid(BLACK_PAWN, &grid, Vec2D(3, 1), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::BLACK));
+	//_entities.push_back(createEntityOnGrid(BLACK_PAWN, &grid, Vec2D(4, 1), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::BLACK));
+	//_entities.push_back(createEntityOnGrid(BLACK_PAWN, &grid, Vec2D(5, 1), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::BLACK));
+	//_entities.push_back(createEntityOnGrid(BLACK_PAWN, &grid, Vec2D(6, 1), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::BLACK));
+	//_entities.push_back(createEntityOnGrid(BLACK_PAWN, &grid, Vec2D(7, 1), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::BLACK));
 
-	_entities.push_back(createEntityOnGrid(WHITE_ROOK, &grid, Vec2D(0, 7), PieceComponent::PieceType::ROOK, PieceComponent::PlayerType::WHITE));
-	_entities.push_back(createEntityOnGrid(WHITE_KNIGHT, &grid, Vec2D(1, 7), PieceComponent::PieceType::KNIGHT, PieceComponent::PlayerType::WHITE));
-	_entities.push_back(createEntityOnGrid(WHITE_BISHOP, &grid, Vec2D(2, 7), PieceComponent::PieceType::BISHOP, PieceComponent::PlayerType::WHITE));
-	_entities.push_back(createEntityOnGrid(WHITE_KING, &grid, Vec2D(3, 7), PieceComponent::PieceType::KING, PieceComponent::PlayerType::WHITE));
-	_entities.push_back(createEntityOnGrid(WHITE_QUEEN, &grid, Vec2D(4, 7), PieceComponent::PieceType::QUEEN, PieceComponent::PlayerType::WHITE));
-	_entities.push_back(createEntityOnGrid(WHITE_BISHOP, &grid, Vec2D(5, 7), PieceComponent::PieceType::BISHOP, PieceComponent::PlayerType::WHITE));
-	_entities.push_back(createEntityOnGrid(WHITE_KNIGHT, &grid, Vec2D(6, 7), PieceComponent::PieceType::KNIGHT, PieceComponent::PlayerType::WHITE));
-	_entities.push_back(createEntityOnGrid(WHITE_ROOK, &grid, Vec2D(7, 7), PieceComponent::PieceType::ROOK, PieceComponent::PlayerType::WHITE));
+	//_entities.push_back(createEntityOnGrid(WHITE_ROOK, &grid, Vec2D(0, 7), PieceComponent::PieceType::ROOK, PieceComponent::PlayerType::WHITE));
+	//_entities.push_back(createEntityOnGrid(WHITE_KNIGHT, &grid, Vec2D(1, 7), PieceComponent::PieceType::KNIGHT, PieceComponent::PlayerType::WHITE));
+	//_entities.push_back(createEntityOnGrid(WHITE_BISHOP, &grid, Vec2D(2, 7), PieceComponent::PieceType::BISHOP, PieceComponent::PlayerType::WHITE));
+	//_entities.push_back(createEntityOnGrid(WHITE_KING, &grid, Vec2D(3, 7), PieceComponent::PieceType::KING, PieceComponent::PlayerType::WHITE));
+	//_entities.push_back(createEntityOnGrid(WHITE_QUEEN, &grid, Vec2D(4, 7), PieceComponent::PieceType::QUEEN, PieceComponent::PlayerType::WHITE));
+	//_entities.push_back(createEntityOnGrid(WHITE_BISHOP, &grid, Vec2D(5, 7), PieceComponent::PieceType::BISHOP, PieceComponent::PlayerType::WHITE));
+	//_entities.push_back(createEntityOnGrid(WHITE_KNIGHT, &grid, Vec2D(6, 7), PieceComponent::PieceType::KNIGHT, PieceComponent::PlayerType::WHITE));
+	//_entities.push_back(createEntityOnGrid(WHITE_ROOK, &grid, Vec2D(7, 7), PieceComponent::PieceType::ROOK, PieceComponent::PlayerType::WHITE));
 
-	_entities.push_back(createEntityOnGrid(WHITE_PAWN, &grid, Vec2D(0, 6), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::WHITE));
-	_entities.push_back(createEntityOnGrid(WHITE_PAWN, &grid, Vec2D(1, 6), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::WHITE));
-	_entities.push_back(createEntityOnGrid(WHITE_PAWN, &grid, Vec2D(2, 6), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::WHITE));
-	_entities.push_back(createEntityOnGrid(WHITE_PAWN, &grid, Vec2D(3, 6), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::WHITE));
-	_entities.push_back(createEntityOnGrid(WHITE_PAWN, &grid, Vec2D(4, 6), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::WHITE));
-	_entities.push_back(createEntityOnGrid(WHITE_PAWN, &grid, Vec2D(5, 6), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::WHITE));
-	_entities.push_back(createEntityOnGrid(WHITE_PAWN, &grid, Vec2D(6, 6), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::WHITE));
-	_entities.push_back(createEntityOnGrid(WHITE_PAWN, &grid, Vec2D(7, 6), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::WHITE));
+	//_entities.push_back(createEntityOnGrid(WHITE_PAWN, &grid, Vec2D(0, 6), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::WHITE));
+	//_entities.push_back(createEntityOnGrid(WHITE_PAWN, &grid, Vec2D(1, 6), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::WHITE));
+	//_entities.push_back(createEntityOnGrid(WHITE_PAWN, &grid, Vec2D(2, 6), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::WHITE));
+	//_entities.push_back(createEntityOnGrid(WHITE_PAWN, &grid, Vec2D(3, 6), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::WHITE));
+	//_entities.push_back(createEntityOnGrid(WHITE_PAWN, &grid, Vec2D(4, 6), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::WHITE));
+	//_entities.push_back(createEntityOnGrid(WHITE_PAWN, &grid, Vec2D(5, 6), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::WHITE));
+	//_entities.push_back(createEntityOnGrid(WHITE_PAWN, &grid, Vec2D(6, 6), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::WHITE));
+	//_entities.push_back(createEntityOnGrid(WHITE_PAWN, &grid, Vec2D(7, 6), PieceComponent::PieceType::PAWN, PieceComponent::PlayerType::WHITE));
 
-	grid.resolvePositions();
+	//grid.resolvePositions();
 
-	Entity border;
-	border.addComponent<GraphicsComponent>(new GraphicsComponent(&border, BORDER));
+	//Entity border;
+	//border.addComponent<GraphicsComponent>(new GraphicsComponent(&border, BORDER));
 
-	int quit = 0;
-	SDL_Event event;
+	//int quit = 0;
+	//SDL_Event event;
 
-	while (!quit) {
+	//while (!quit) {
 
-		while (SDL_PollEvent(&event)) {
-			if (event.type == SDL_QUIT) {
-				quit = 1;
-			}
+	//	while (SDL_PollEvent(&event)) {
+	//		if (event.type == SDL_QUIT) {
+	//			quit = 1;
+	//		}
 
-			if (event.type == SDL_MOUSEBUTTONDOWN) {
-				if (event.button.button == SDL_BUTTON_LEFT) {
-					grid.selectGrid(Vec2D(event.button.x, event.button.y));
-				}
-			}
-		}
+	//		if (event.type == SDL_MOUSEBUTTONDOWN) {
+	//			if (event.button.button == SDL_BUTTON_LEFT) {
+	//				grid.selectGrid(Vec2D(event.button.x, event.button.y));
+	//			}
+	//		}
+	//	}
 
-		// Make sure positions are updated from grid
-		grid.resolvePositions();
+	//	// Make sure positions are updated from grid
+	//	grid.resolvePositions();
 
-		// Clean up any dead entities
-		for (auto it = _entities.begin(); it != _entities.end(); it++) {
-			if (!(*it)->isAlive()) {
-				delete *it;
-				it = _entities.erase(it);
-			}
-		}
+	//	// Clean up any dead entities
+	//	for (auto it = _entities.begin(); it != _entities.end(); it++) {
+	//		if (!(*it)->isAlive()) {
+	//			delete *it;
+	//			it = _entities.erase(it);
+	//		}
+	//	}
 
-		_graphics->clearRenderer();
+	//	_graphics->clearRenderer();
 
-		for (int i = 0; i < grid.getNumRows(); i++) {
-			for (int j = 0; j < grid.getNumCols(); j++) {
-				Vec2D squareLoc(i, j);
-				Entity* gridSquare = grid.getGridSquare(squareLoc);
-				if (gridSquare != nullptr) {
-					_graphics->drawSprite(gridSquare->getComponent<GraphicsComponent>()->getName(), gridSquare->getPosition().x, gridSquare->getPosition().y);
-				}
-			}
-		}
+	//	for (int i = 0; i < grid.getNumRows(); i++) {
+	//		for (int j = 0; j < grid.getNumCols(); j++) {
+	//			Vec2D squareLoc(i, j);
+	//			Entity* gridSquare = grid.getGridSquare(squareLoc);
+	//			if (gridSquare != nullptr) {
+	//				_graphics->drawSprite(gridSquare->getComponent<GraphicsComponent>()->getName(), gridSquare->getPosition().x, gridSquare->getPosition().y);
+	//			}
+	//		}
+	//	}
 
-		if (grid.getSelectedSquare() != nullptr) {
-			Vec2D position = grid.getSelectedSquare()->getPosition();
-			_graphics->drawSprite(BORDER, position.x, position.y);
-		}
+	//	if (grid.getSelectedSquare() != nullptr) {
+	//		Vec2D position = grid.getSelectedSquare()->getPosition();
+	//		_graphics->drawSprite(BORDER, position.x, position.y);
+	//	}
 
-		for (auto it = _entities.begin(); it != _entities.end(); it++) {
-			Entity* entity = (*it);
-			if (entity->getComponent<GraphicsComponent>() != nullptr) {
-				_graphics->drawSprite(entity->getComponent<GraphicsComponent>()->getName(), entity->getPosition().x, entity->getPosition().y);
-			}
-		}
+	//	for (auto it = _entities.begin(); it != _entities.end(); it++) {
+	//		Entity* entity = (*it);
+	//		if (entity->getComponent<GraphicsComponent>() != nullptr) {
+	//			_graphics->drawSprite(entity->getComponent<GraphicsComponent>()->getName(), entity->getPosition().x, entity->getPosition().y);
+	//		}
+	//	}
 
-		_graphics->render();
+	//	_graphics->render();
 
-	}
+	//}
 
-    _graphics->closeWindow();
+ //   _graphics->closeWindow();
 
-    delete _graphics;
+ //   delete _graphics;
 
-	for (auto it = _entities.begin(); it != _entities.end(); it++) {
-		delete *it;
-	}
+	//for (auto it = _entities.begin(); it != _entities.end(); it++) {
+	//	delete *it;
+	//}
 
-	_entities.clear();
+	//_entities.clear();
+
+	Game game;
+
+	game.setup();
+
+	game.runMainLoop();
 
     return 0;
 }

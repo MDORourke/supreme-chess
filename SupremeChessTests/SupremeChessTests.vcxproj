@@ -236,8 +236,10 @@
     <ClInclude Include="include\MockComponent.h" />
     <ClInclude Include="include\stdafx.h" />
     <ClInclude Include="include\targetver.h" />
+    <ClInclude Include="MockGrid.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GridSelectionStateTest.cpp" />
     <ClCompile Include="GridTest.cpp" />
     <ClCompile Include="src\EntityTest.cpp" />
     <ClCompile Include="src\stdafx.cpp">

@@ -27,6 +27,9 @@
     <ClInclude Include="include\MockComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MockGrid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\stdafx.cpp">
@@ -39,6 +42,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GridTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GridSelectionStateTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
