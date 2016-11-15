@@ -32,6 +32,7 @@ bool BoardController::moveChessPiece(Vec2D from, Vec2D to) {
 		// Move the piece over
 		toTile->setChessPiece(fromTile->getChessPiece());
 		fromTile->setChessPiece(nullptr);
+		toTile->getChessPiece()->tickHasMovedFlag();
 
 		return true;
 	}
@@ -68,7 +69,6 @@ void BoardController::selectBoardTile(Vec2D boardPosition) {
 	}
 
 	// Highlight legal takes/moves
-	highlightLegalTakes(boardPosition);
 	highlightLegalMoves(boardPosition);
 }
 
@@ -76,33 +76,22 @@ void BoardController::clearSelectedTile() {
 	_selectedTile->setBorderSpriteKey(nullptr);
 	_selectedTile = nullptr;
 
-	clearHighlightedLegalTakes();
 	clearHighlightedLegalMoves();
 }
 
-void BoardController::highlightLegalTakes(Vec2D boardPosition) {
-	Board::MoveList takes = _board->getLegalTakes(boardPosition);
-	for (auto it = takes.begin(); it != takes.end(); it++) {
-		BoardTile* tile = _board->getBoardTile(*it);
-		tile->setBorderSpriteKey(_legalTakeBorderSpriteKey);
-		_highlightedLegalTakes.push_back(tile);
-	}
-
-}
-
-void BoardController::clearHighlightedLegalTakes() {
-	for (auto it = _highlightedLegalTakes.begin(); it != _highlightedLegalTakes.end(); it++) {
-		(*it)->setBorderSpriteKey(nullptr);
-	}
-	_highlightedLegalTakes.clear();
-}
-
 void BoardController::highlightLegalMoves(Vec2D boardPosition) {
-	Board::MoveList moves = _board->getLegalMoves(boardPosition);
+	MoveList moves = _board->getLegalMoves(boardPosition);
 	for (auto it = moves.begin(); it != moves.end(); it++) {
-		BoardTile* tile = _board->getBoardTile(*it);
-		tile->setBorderSpriteKey(_legalMoveBorderSpriteKey);
-		_highlightedLegalTakes.push_back(tile);
+		BoardTile* tile = _board->getBoardTile(it->destination);
+		switch (it->moveType) {
+		case Move::MOVE:
+			tile->setBorderSpriteKey(_legalMoveBorderSpriteKey);
+			break;
+		case Move::TAKE:
+			tile->setBorderSpriteKey(_legalTakeBorderSpriteKey);
+			break;
+		}
+		_highlightedLegalMoves.push_back(tile);
 	}
 }
 

@@ -20,6 +20,10 @@ void PlayerInputController::handleClick(Vec2D boardPosition) {
 					_boardController->clearSelectedTile();
 					_game->endTurn();
 				}
+				// Otherwise select the new tile
+				else {
+					_boardController->selectBoardTile(boardPosition);
+				}
 			}
 			else {
 				// Select the tile

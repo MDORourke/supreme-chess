@@ -113,6 +113,12 @@
     <ClInclude Include="include\PlayerType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Move.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Direction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

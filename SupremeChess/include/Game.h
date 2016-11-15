@@ -46,12 +46,12 @@ private:
 	const char* SPRITE_BORDER_MOVE = "border_move";
 	const char* SPRITE_BORDER_TAKE = "border_take";
 
-	const ChessPieceType CHESS_PIECE_QUEEN = ChessPieceType(ChessPieceType::Directions::ALL, true);
-	const ChessPieceType CHESS_PIECE_KING = ChessPieceType(ChessPieceType::Directions::ALL, false);
-	const ChessPieceType CHESS_PIECE_BISHOP = ChessPieceType(ChessPieceType::Directions::NORTHEAST | ChessPieceType::Directions::SOUTHEAST | ChessPieceType::Directions::SOUTHWEST | ChessPieceType::Directions::NORTHWEST, true);
-	const ChessPieceType CHESS_PIECE_KNIGHT = ChessPieceType(ChessPieceType::Directions::NO_DIRECTION, false, ChessPieceType::SpecialModifiers::KNIGHT);
-	const ChessPieceType CHESS_PIECE_ROOK = ChessPieceType(ChessPieceType::Directions::EAST | ChessPieceType::Directions::WEST | ChessPieceType::Directions::NORTH | ChessPieceType::SOUTH, true);
-	const ChessPieceType CHESS_PIECE_PAWN = ChessPieceType(ChessPieceType::Directions::NORTH, false, ChessPieceType::SpecialModifiers::PAWN);
+	const ChessPieceType CHESS_PIECE_QUEEN = ChessPieceType(Direction::ALL, true);
+	const ChessPieceType CHESS_PIECE_KING = ChessPieceType(Direction::ALL, false);
+	const ChessPieceType CHESS_PIECE_BISHOP = ChessPieceType(Direction::NORTHEAST | Direction::SOUTHEAST | Direction::SOUTHWEST | Direction::NORTHWEST, true);
+	const ChessPieceType CHESS_PIECE_KNIGHT = ChessPieceType(Direction::NONE, false, ChessPieceType::SpecialModifiers::KNIGHT);
+	const ChessPieceType CHESS_PIECE_ROOK = ChessPieceType(Direction::EAST | Direction::WEST | Direction::NORTH | Direction::SOUTH, true);
+	const ChessPieceType CHESS_PIECE_PAWN = ChessPieceType(Direction::NORTH, false, ChessPieceType::SpecialModifiers::PAWN);
 
 	const int TILE_SIZE = 50;
 	const Vec2D TILE_DIMENSIONS = { TILE_SIZE, TILE_SIZE };
@@ -67,7 +67,6 @@ public:
 	GraphicsSystem::SpriteProperty createSpriteProperty(const char* name, Vec2D position, Vec2D dimensions);
 	GraphicsSystem::SpriteProperties createChessPieceProperties();
 
-	void refreshLegalTakes();
 	void refreshLegalMoves();
 
 	void endTurn();

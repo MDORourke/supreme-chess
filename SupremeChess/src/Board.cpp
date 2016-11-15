@@ -24,22 +24,7 @@ Board::~Board() {
 	delete[] _boardTiles;
 }
 
-Board::MoveList Board::getLegalTakes(Vec2D position) const {
-
-	// Convert position to tile ID
-	TileId id = convertPositionToTileId(position);
-
-	auto it = _legalTakes.find(id);
-
-	if (it == _legalTakes.end()) {
-		return Board::MoveList();
-	}
-
-	MoveList list = it->second;
-	return list;
-}
-
-Board::MoveList Board::getLegalMoves(Vec2D position) const {
+MoveList Board::getLegalMoves(Vec2D position) const {
 
 	// Convert position to tile ID
 	TileId id = convertPositionToTileId(position);
@@ -47,18 +32,11 @@ Board::MoveList Board::getLegalMoves(Vec2D position) const {
 	auto it = _legalMoves.find(id);
 
 	if (it == _legalMoves.end()) {
-		return Board::MoveList();
+		return MoveList();
 	}
 
 	MoveList list = it->second;
 	return list;
-}
-
-void Board::setLegalTakes(Vec2D position, MoveList takes) {
-	// Convert position to tile ID
-	TileId id = convertPositionToTileId(position);
-
-	_legalTakes[id] = takes;
 }
 
 void Board::setLegalMoves(Vec2D position, MoveList moves) {
@@ -68,6 +46,6 @@ void Board::setLegalMoves(Vec2D position, MoveList moves) {
 	_legalMoves[id] = moves;
 }
 
-bool Board::tileIsOnBoard(Vec2D tilePosition) {
+bool Board::tileIsOnBoard(Vec2D tilePosition) const {
 	return tilePosition >= Vec2D(0, 0) && tilePosition < _dimensions;
 }

@@ -70,7 +70,6 @@ void Game::setup() {
 	}
 
 	// Refresh the legal takes/moves
-	refreshLegalTakes();
 	refreshLegalMoves();
 
 }
@@ -159,20 +158,11 @@ GraphicsSystem::SpriteProperties Game::createChessPieceProperties() {
 	return properties;
 }
 
-void Game::refreshLegalTakes() {
-	for (int i = 0; i < _board->getDimensions().x; i++) {
-		for (int j = 0; j < _board->getDimensions().y; j++) {
-			Vec2D tilePos(i, j);
-			_board->setLegalTakes(tilePos, _moveGenerator->generateLegalTakes(tilePos));
-		}
-	}
-}
-
 void Game::refreshLegalMoves() {
 	for (int i = 0; i < _board->getDimensions().x; i++) {
 		for (int j = 0; j < _board->getDimensions().y; j++) {
 			Vec2D tilePos(i, j);
-			_board->setLegalMoves(tilePos, _moveGenerator->generateLegalMoves(tilePos, _board->getLegalTakes(tilePos)));
+			_board->setLegalMoves(tilePos, _moveGenerator->generateLegalMoves(tilePos));
 		}
 	}
 }
@@ -188,6 +178,5 @@ void Game::endTurn() {
 	}
 
 	// Refresh the legal takes/moves
-	refreshLegalTakes();
 	refreshLegalMoves();
 }

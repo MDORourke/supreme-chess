@@ -11,7 +11,6 @@ private:
 	BoardTile *_selectedTile = nullptr;
 	Vec2D _selectedTilePosition;
 
-	std::vector<BoardTile*> _highlightedLegalTakes;
 	std::vector<BoardTile*> _highlightedLegalMoves;
 
 	const char* _selectedTileBorderSpriteKey;
@@ -34,8 +33,6 @@ public:
 	void selectBoardTile(Vec2D boardPosition);
 	void clearSelectedTile();
 
-	void highlightLegalTakes(Vec2D boardPosition);
-	void clearHighlightedLegalTakes();
 	void highlightLegalMoves(Vec2D boardPosition);
 	void clearHighlightedLegalMoves();
 

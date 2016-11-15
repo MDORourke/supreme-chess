@@ -151,6 +151,7 @@ lib /NOLOGO /OUT:"$(SolutionDir)SupremeChessTests\lib\SupremeChess.lib" "$(Proje
     <ClInclude Include="include\ChessPiece.h" />
     <ClInclude Include="include\ChessPieceType.h" />
     <ClInclude Include="include\Component.h" />
+    <ClInclude Include="include\Direction.h" />
     <ClInclude Include="include\Entity.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\GraphicsComponent.h" />
@@ -159,6 +160,7 @@ lib /NOLOGO /OUT:"$(SolutionDir)SupremeChessTests\lib\SupremeChess.lib" "$(Proje
     <ClInclude Include="include\GridComponent.h" />
     <ClInclude Include="include\GridSelectionState.h" />
     <ClInclude Include="include\impl\SDLCaller.h" />
+    <ClInclude Include="include\Move.h" />
     <ClInclude Include="include\MoveGenerator.h" />
     <ClInclude Include="include\PieceComponent.h" />
     <ClInclude Include="include\PlayerType.h" />

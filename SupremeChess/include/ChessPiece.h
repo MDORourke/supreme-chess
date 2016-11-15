@@ -34,6 +34,8 @@ public:
 	void tickHasMovedFlag() { _hasMoved = true; }
 	void tickIsDeadFlag() { _isDead = true; }
 
+	inline bool canTake(ChessPiece* piece) { return _owner != piece->getOwner(); }
+
 };
 
 #endif
