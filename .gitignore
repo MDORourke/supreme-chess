@@ -2,5 +2,5 @@ Release/*
 */x64/*
 SupremeChessTests/lib/SupremeChess.lib
 *.VC.VC.opendb
-*.db
+*.VC.db
 *.suo
