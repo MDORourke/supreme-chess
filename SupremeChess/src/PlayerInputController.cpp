@@ -16,7 +16,9 @@ void PlayerInputController::handleClick(Vec2D boardPosition) {
 
 			// If there is a piece and it belongs to this player
 			if (piece != nullptr && piece->getOwner() == _player) {
-				if (_boardController->moveChessPiece(_boardController->getSelectedTilePosition(), boardPosition)) {
+
+				// Check whether piece can move to this spots
+				if (_boardController->tryMoveChessPiece(_boardController->getSelectedTilePosition(), boardPosition)) {
 					_boardController->clearSelectedTile();
 					_game->endTurn();
 				}

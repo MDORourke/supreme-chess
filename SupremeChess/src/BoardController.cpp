@@ -11,30 +11,24 @@ void BoardController::addChessPieceToBoard(ChessPiece* piece, Vec2D position) {
 }
 
 // Returns true if the move was successful
-bool BoardController::moveChessPiece(Vec2D from, Vec2D to) {
+bool BoardController::tryMoveChessPiece(Vec2D from, Vec2D to) {
 
-	// Make sure both vectors lie within the dimensions of the board
-	if (_board->tileIsOnBoard(from) && _board->tileIsOnBoard(to)) {
-		// Make sure there is a chess piece on the from tile
-		BoardTile *fromTile = _board->getBoardTile(from);
+	MoveList moves = _board->getLegalMoves(from);
 
-		if (fromTile->getChessPiece() == nullptr) {
-			return false;
+	BoardTile *fromTile = _board->getBoardTile(from);
+
+	for (auto it = moves.begin(); it != moves.end(); ++it) {
+		if (it->destination == to) {
+			BoardTile *toTile = _board->getBoardTile(to);
+			if (it->moveType == Move::TAKE) {
+				toTile->getChessPiece()->tickIsDeadFlag();
+			}
+			toTile->setChessPiece(fromTile->getChessPiece());
+			fromTile->setChessPiece(nullptr);
+			toTile->getChessPiece()->tickHasMovedFlag();
+
+			return true;
 		}
-
-		// Make sure there is not a chess piece on the to tile
-		BoardTile *toTile = _board->getBoardTile(to);
-		
-		if (toTile->getChessPiece() != nullptr) {
-			return false;
-		}
-
-		// Move the piece over
-		toTile->setChessPiece(fromTile->getChessPiece());
-		fromTile->setChessPiece(nullptr);
-		toTile->getChessPiece()->tickHasMovedFlag();
-
-		return true;
 	}
 
 	return false;

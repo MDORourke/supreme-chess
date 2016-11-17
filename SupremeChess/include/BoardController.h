@@ -26,7 +26,7 @@ public:
 	void attachToBoard(Board *board) { _board = board; }
 
 	void addChessPieceToBoard(ChessPiece* piece, Vec2D position);
-	bool moveChessPiece(Vec2D from, Vec2D to);
+	bool tryMoveChessPiece(Vec2D from, Vec2D to);
 
 	void cleanUpDeadChessPieces();
 
