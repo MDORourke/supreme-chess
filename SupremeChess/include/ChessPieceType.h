@@ -10,7 +10,8 @@ public:
 	enum SpecialModifiers {
 		NO_MODIFIER,
 		PAWN,
-		KNIGHT
+		KNIGHT,
+		KING
 	};
 
 private:

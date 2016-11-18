@@ -78,6 +78,14 @@ public:
 		return SDL_RenderClear(renderer);
 	}
 
+	inline int setSDLDrawColor(SDL_Renderer* renderer, int r, int g, int b, int a) {
+		return SDL_SetRenderDrawColor(renderer, r, g, b, a);
+	}
+
+	inline int getSDLDrawColor(SDL_Renderer* renderer, int& r, int& g, int& b, int& a) {
+		return SDL_GetRenderDrawColor(renderer, (Uint8 *) &r, (Uint8 *) &g, (Uint8 *) &b, (Uint8 *) &a);
+	}
+
 	inline void presentSDLRenderer(SDL_Renderer* renderer) {
 		SDL_RenderPresent(renderer);
 	}

@@ -120,6 +120,17 @@ void GraphicsSystem::clearRenderer() {
     _sdlCaller.clearSDLRenderer(_renderer);
 }
 
+void GraphicsSystem::clearRenderer(Color color) {
+	Color oldColor;
+	_sdlCaller.getSDLDrawColor(_renderer, oldColor.r, oldColor.g, oldColor.b, oldColor.a);
+	_sdlCaller.setSDLDrawColor(_renderer, color.r, color.g, color.b, color.a);
+	clearRenderer();
+	_sdlCaller.setSDLDrawColor(_renderer, oldColor.r, oldColor.g, oldColor.b, oldColor.a);
+}
+
 void GraphicsSystem::render() {
     _sdlCaller.presentSDLRenderer(_renderer);
 }
+
+const GraphicsSystem::Color GraphicsSystem::WHITE = { 255, 255, 255, 255 };
+const GraphicsSystem::Color GraphicsSystem::BLACK = { 0, 0, 0, 255 };

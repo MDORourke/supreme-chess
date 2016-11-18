@@ -25,7 +25,7 @@ void Game::setup() {
 	_board = _boardBuilder->setNumBoardFiles(8)->setNumBoardRanks(8)->build();
 
 	// Setup the window
-	_graphics = new GraphicsSystem("Supreme Chess", 400, 400);
+	_graphics = new GraphicsSystem("Supreme Chess", 500, 500);
 	_graphics->showWindow();
 	
 	// Load the sprites
@@ -88,10 +88,14 @@ void Game::runMainLoop() {
 
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
 				// Translate click to board co-ordinates
-				Vec2D boardPosition(event.button.x, event.button.y);
-				boardPosition.x = std::floor(boardPosition.x / TILE_SIZE);
-				boardPosition.y = std::floor(boardPosition.y / TILE_SIZE);
-				_inputControllers[_currentPlayer]->handleClick(boardPosition);
+				Vec2D boardPosition = Vec2D(event.button.x, event.button.y) - BOARD_OFFSET;
+				if (boardPosition > 0) {
+					boardPosition.x = std::floor(boardPosition.x / TILE_SIZE);
+					boardPosition.y = std::floor(boardPosition.y / TILE_SIZE);
+					if (_board->tileIsOnBoard(boardPosition)) {
+						_inputControllers[_currentPlayer]->handleClick(boardPosition);
+					}
+				}
 			}
 		}
 
@@ -99,11 +103,12 @@ void Game::runMainLoop() {
 		_boardController->cleanUpDeadChessPieces();
 
 		// Draw sprites
-		_graphics->clearRenderer();
+		GraphicsSystem::Color playerColor = _currentPlayer == PlayerType::WHITE ? GraphicsSystem::WHITE : GraphicsSystem::BLACK;
+		_graphics->clearRenderer(playerColor);
 
 		for (int i = 0; i < _board->getDimensions().x; i++) {
 			for (int j = 0; j < _board->getDimensions().y; j++) {
-				Vec2D position(TILE_SIZE * i, TILE_SIZE * j);
+				Vec2D position(BOARD_OFFSET + TILE_SIZE * i, BOARD_OFFSET + TILE_SIZE * j);
 				BoardTile* tile = _board->getBoardTile(Vec2D(i, j));
 				if (tile != nullptr) {
 					_graphics->drawSprite(tile->getSpriteKey(), position.x, position.y);
@@ -167,6 +172,32 @@ void Game::refreshLegalMoves() {
 	}
 }
 
+void Game::checkLose(PlayerType player) {
+	bool kingFound = false;
+
+	for (int i = 0; i < _board->getDimensions().x; i++) {
+		for (int j = 0; j < _board->getDimensions().y; j++) {
+			Vec2D tilePos(i, j);
+			BoardTile* tile = _board->getBoardTile(tilePos);
+			if (tile != nullptr) {
+				ChessPiece* piece = tile->getChessPiece();
+				if (piece != nullptr
+					&& piece->getChessPieceType().getSpecialModifiers() == ChessPieceType::KING
+					&& piece->getOwner() == player) {
+					// Might not be cleaned up yet
+					if (!piece->isDead()) {
+						kingFound = true;
+					}
+				}
+			}
+		}
+	}
+
+	if (!kingFound) {
+		_shouldQuit = true;
+	}
+}
+
 void Game::endTurn() {
 	switch (_currentPlayer) {
 	case PlayerType::WHITE:
@@ -176,6 +207,9 @@ void Game::endTurn() {
 		_currentPlayer = PlayerType::WHITE;
 		break;
 	}
+
+	// Check the win conditions
+	checkLose(_currentPlayer);
 
 	// Refresh the legal takes/moves
 	refreshLegalMoves();

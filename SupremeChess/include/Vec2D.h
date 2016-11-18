@@ -33,16 +33,32 @@ inline bool operator<(Vec2D a, Vec2D b) {
 	return a.x < b.x && a.y < b.y;
 }
 
+inline bool operator<(Vec2D a, int b) {
+	return a.x < b && a.y < b;
+}
+
 inline bool operator>(Vec2D a, Vec2D b) {
 	return a.x > b.x && a.y > b.y;
+}
+
+inline bool operator>(Vec2D a, int b) {
+	return a.x > b && a.y > b;
 }
 
 inline bool operator<=(Vec2D a, Vec2D b) {
 	return a.x <= b.x && a.y <= b.y;
 }
 
+inline bool operator<=(Vec2D a, int b) {
+	return a.x <= b && a.y <= b;
+}
+
 inline bool operator>=(Vec2D a, Vec2D b) {
 	return a.x >= b.x && a.y >= b.y;
+}
+
+inline bool operator>=(Vec2D a, int b) {
+	return a.x >= b && a.y > b;
 }
 
 #endif

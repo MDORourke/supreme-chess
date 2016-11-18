@@ -10,14 +10,14 @@ MoveList MoveGenerator::generateLegalMoves(Vec2D boardPosition) {
 		
 		// Check for special rules
 		switch (type.getSpecialModifiers()) {
-		case ChessPieceType::NO_MODIFIER:
-			moves = getStandardMoves(boardPosition, piece);
-			break;
 		case ChessPieceType::PAWN:
 			moves = getPawnMovement(boardPosition);
 			break;
 		case ChessPieceType::KNIGHT:
 			moves = getKnightMovement(boardPosition);
+			break;
+		default:
+			moves = getStandardMoves(boardPosition, piece);
 			break;
 		}
 	}

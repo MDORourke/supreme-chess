@@ -47,13 +47,14 @@ private:
 	const char* SPRITE_BORDER_TAKE = "border_take";
 
 	const ChessPieceType CHESS_PIECE_QUEEN = ChessPieceType(Direction::ALL, true);
-	const ChessPieceType CHESS_PIECE_KING = ChessPieceType(Direction::ALL, false);
+	const ChessPieceType CHESS_PIECE_KING = ChessPieceType(Direction::ALL, false, ChessPieceType::SpecialModifiers::KING);
 	const ChessPieceType CHESS_PIECE_BISHOP = ChessPieceType(Direction::NORTHEAST | Direction::SOUTHEAST | Direction::SOUTHWEST | Direction::NORTHWEST, true);
 	const ChessPieceType CHESS_PIECE_KNIGHT = ChessPieceType(Direction::NONE, false, ChessPieceType::SpecialModifiers::KNIGHT);
 	const ChessPieceType CHESS_PIECE_ROOK = ChessPieceType(Direction::EAST | Direction::WEST | Direction::NORTH | Direction::SOUTH, true);
 	const ChessPieceType CHESS_PIECE_PAWN = ChessPieceType(Direction::NORTH, false, ChessPieceType::SpecialModifiers::PAWN);
 
 	const int TILE_SIZE = 50;
+	const int BOARD_OFFSET = 50;
 	const Vec2D TILE_DIMENSIONS = { TILE_SIZE, TILE_SIZE };
 
 public:
@@ -68,6 +69,7 @@ public:
 	GraphicsSystem::SpriteProperties createChessPieceProperties();
 
 	void refreshLegalMoves();
+	void checkLose(PlayerType player);
 
 	void endTurn();
 
