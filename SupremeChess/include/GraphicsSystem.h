@@ -55,6 +55,9 @@ public:
 		const char* name;
 		int x, y;
 		int width, height;
+
+		SpriteProperty() {}
+		SpriteProperty(const char* name, int x, int y, int width, int height) : name(name), x(x), y(y), width(width), height(height) {}
     };
 
 	struct Color {

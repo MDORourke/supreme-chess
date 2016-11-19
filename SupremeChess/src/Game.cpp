@@ -38,6 +38,14 @@ void Game::setup() {
 	GraphicsSystem::SpriteProperties pieceProps = createChessPieceProperties();
 	_graphics->loadSpritesheet(pieceProps, "res/chess_pieces_small.png");
 
+	// Load the text
+	GraphicsSystem::SpriteProperties textProps;
+	textProps.push_back(GraphicsSystem::SpriteProperty(SPRITE_WHITE_PLAYER_TURN, 0, 0, 200, 50));
+	textProps.push_back(GraphicsSystem::SpriteProperty(SPRITE_BLACK_PLAYER_TURN, 200, 0, 200, 50));
+	textProps.push_back(GraphicsSystem::SpriteProperty(SPRITE_WHITE_PLAYER_WON, 0, 50, 200, 50));
+	textProps.push_back(GraphicsSystem::SpriteProperty(SPRITE_BLACK_PLAYER_WON, 200, 50, 200, 50));
+	_graphics->loadSpritesheet(textProps, "res/text.png");
+
 	// Attach the controller and the generator to the board
 	_boardController->attachToBoard(_board);
 	_moveGenerator->attachToBoard(_board);
@@ -86,7 +94,8 @@ void Game::runMainLoop() {
 				_shouldQuit = true;
 			}
 
-			if (event.type == SDL_MOUSEBUTTONDOWN) {
+			// Only allow clicks if the game has not finished
+			if (event.type == SDL_MOUSEBUTTONDOWN && _winner == PlayerType::NONE) {
 				// Translate click to board co-ordinates
 				Vec2D boardPosition = Vec2D(event.button.x, event.button.y) - BOARD_OFFSET;
 				if (boardPosition > 0) {
@@ -124,6 +133,26 @@ void Game::runMainLoop() {
 					}
 				}
 			}
+		}
+
+		// Draw text
+		switch (_winner) {
+		case PlayerType::NONE:
+			switch (_currentPlayer) {
+			case PlayerType::WHITE:
+				_graphics->drawSprite(SPRITE_WHITE_PLAYER_TURN, 0, 0);
+				break;
+			case PlayerType::BLACK:
+				_graphics->drawSprite(SPRITE_BLACK_PLAYER_TURN, 300, 450);
+				break;
+			}
+			break;
+		case PlayerType::WHITE:
+			_graphics->drawSprite(SPRITE_WHITE_PLAYER_WON, 0, 0);
+			break;
+		case PlayerType::BLACK:
+			_graphics->drawSprite(SPRITE_BLACK_PLAYER_WON, 300, 450);
+			break;
 		}
 
 		_graphics->render();
@@ -172,8 +201,9 @@ void Game::refreshLegalMoves() {
 	}
 }
 
-void Game::checkLose(PlayerType player) {
-	bool kingFound = false;
+void Game::checkWin() {
+	ChessPiece* kings[2];
+	int kingsFound = 0;
 
 	for (int i = 0; i < _board->getDimensions().x; i++) {
 		for (int j = 0; j < _board->getDimensions().y; j++) {
@@ -182,35 +212,39 @@ void Game::checkLose(PlayerType player) {
 			if (tile != nullptr) {
 				ChessPiece* piece = tile->getChessPiece();
 				if (piece != nullptr
-					&& piece->getChessPieceType().getSpecialModifiers() == ChessPieceType::KING
-					&& piece->getOwner() == player) {
+					&& piece->getChessPieceType().getSpecialModifiers() == ChessPieceType::KING) {
 					// Might not be cleaned up yet
 					if (!piece->isDead()) {
-						kingFound = true;
+						kings[kingsFound++] = piece;
 					}
 				}
 			}
 		}
 	}
 
-	if (!kingFound) {
-		_shouldQuit = true;
+	// If there's only one king left, that player wins
+	if (kingsFound == 1) {
+		_winner = kings[0]->getOwner();
 	}
 }
 
 void Game::endTurn() {
-	switch (_currentPlayer) {
-	case PlayerType::WHITE:
-		_currentPlayer = PlayerType::BLACK;
-		break;
-	case PlayerType::BLACK:
-		_currentPlayer = PlayerType::WHITE;
-		break;
-	}
-
 	// Check the win conditions
-	checkLose(_currentPlayer);
+	checkWin();
 
-	// Refresh the legal takes/moves
-	refreshLegalMoves();
+	if (_winner == PlayerType::NONE) {
+
+		switch (_currentPlayer) {
+		case PlayerType::WHITE:
+			_currentPlayer = PlayerType::BLACK;
+			break;
+		case PlayerType::BLACK:
+			_currentPlayer = PlayerType::WHITE;
+			break;
+		}
+
+		// Refresh the legal takes/moves
+		refreshLegalMoves();
+
+	}
 }

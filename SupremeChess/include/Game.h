@@ -20,6 +20,7 @@ private:
 	std::map<PlayerType, PlayerInputController*> _inputControllers;
 
 	PlayerType _currentPlayer = PlayerType::WHITE;
+	PlayerType _winner = PlayerType::NONE;
 
 	bool _shouldQuit = false;
 
@@ -46,6 +47,11 @@ private:
 	const char* SPRITE_BORDER_MOVE = "border_move";
 	const char* SPRITE_BORDER_TAKE = "border_take";
 
+	const char* SPRITE_WHITE_PLAYER_TURN = "white_player_turn";
+	const char* SPRITE_BLACK_PLAYER_TURN = "black_player_turn";
+	const char* SPRITE_WHITE_PLAYER_WON = "white_player_won";
+	const char* SPRITE_BLACK_PLAYER_WON = "black_player_won";
+
 	const ChessPieceType CHESS_PIECE_QUEEN = ChessPieceType(Direction::ALL, true);
 	const ChessPieceType CHESS_PIECE_KING = ChessPieceType(Direction::ALL, false, ChessPieceType::SpecialModifiers::KING);
 	const ChessPieceType CHESS_PIECE_BISHOP = ChessPieceType(Direction::NORTHEAST | Direction::SOUTHEAST | Direction::SOUTHWEST | Direction::NORTHWEST, true);
@@ -69,7 +75,7 @@ public:
 	GraphicsSystem::SpriteProperties createChessPieceProperties();
 
 	void refreshLegalMoves();
-	void checkLose(PlayerType player);
+	void checkWin();
 
 	void endTurn();
 
