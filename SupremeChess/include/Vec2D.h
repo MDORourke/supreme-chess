@@ -13,4 +13,52 @@ inline bool operator==(Vec2D a, Vec2D b) {
 	return a.x == b.x && a.y == b.y;
 }
 
+inline Vec2D& operator+(Vec2D a, Vec2D b) {
+	return Vec2D(a.x + b.x, a.y + b.y);
+}
+
+inline Vec2D& operator-(Vec2D a, Vec2D b) {
+	return Vec2D(a.x - b.x, a.y - b.y);
+}
+
+inline Vec2D& operator+(Vec2D a, int i) {
+	return Vec2D(a.x + i, a.y + i);
+}
+
+inline Vec2D& operator-(Vec2D a, int i) {
+	return Vec2D(a.x - i, a.y - i);
+}
+
+inline bool operator<(Vec2D a, Vec2D b) {
+	return a.x < b.x && a.y < b.y;
+}
+
+inline bool operator<(Vec2D a, int b) {
+	return a.x < b && a.y < b;
+}
+
+inline bool operator>(Vec2D a, Vec2D b) {
+	return a.x > b.x && a.y > b.y;
+}
+
+inline bool operator>(Vec2D a, int b) {
+	return a.x > b && a.y > b;
+}
+
+inline bool operator<=(Vec2D a, Vec2D b) {
+	return a.x <= b.x && a.y <= b.y;
+}
+
+inline bool operator<=(Vec2D a, int b) {
+	return a.x <= b && a.y <= b;
+}
+
+inline bool operator>=(Vec2D a, Vec2D b) {
+	return a.x >= b.x && a.y >= b.y;
+}
+
+inline bool operator>=(Vec2D a, int b) {
+	return a.x >= b && a.y > b;
+}
+
 #endif

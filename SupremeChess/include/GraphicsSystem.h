@@ -52,10 +52,23 @@ public:
     // External representation of a sprite's properties
 
     struct SpriteProperty {
-	const char* name;
-	int x, y;
-	int width, height;
+		const char* name;
+		int x, y;
+		int width, height;
+
+		SpriteProperty() {}
+		SpriteProperty(const char* name, int x, int y, int width, int height) : name(name), x(x), y(y), width(width), height(height) {}
     };
+
+	struct Color {
+		int r, g, b, a;
+
+		Color() : r(0), g(0), b(0), a(0) {}
+		Color(int r, int g, int b, int a) : r(r), g(g), b(b), a(a) {}
+	};
+
+	static const Color WHITE;
+	static const Color BLACK;
 
     typedef std::vector<SpriteProperty> SpriteProperties;
 
@@ -132,6 +145,7 @@ public:
     /* Clears the renderer
      */
     void clearRenderer();
+	void clearRenderer(Color color);
 
     /* Render to the screen
      */

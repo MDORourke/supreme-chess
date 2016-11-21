@@ -4,7 +4,7 @@
 #include "Entity.h"
 #include "MockComponent.h"
 
-TEST(EntityTest, CanAddComponent) {
+TEST(EntityTest, addComponent_ComponentIsValid_AddComponent) {
 
 	Entity entity;
 	MockComponent *component = new MockComponent(&entity);
@@ -17,7 +17,7 @@ TEST(EntityTest, CanAddComponent) {
 
 }
 
-TEST(EntityTest, ReturnNULLIfNoComponent) {
+TEST(EntityTest, getComponent_RequiredComponentIsNull_ReturnNull) {
 	Entity entity;
 
 	MockComponent* actualComponent = entity.getComponent<MockComponent>();
@@ -25,7 +25,7 @@ TEST(EntityTest, ReturnNULLIfNoComponent) {
 	EXPECT_EQ(actualComponent, nullptr);
 }
 
-TEST(EntityTest, ReturnCorrectComponent) {
+TEST(EntityTest, getComponent_RequiredComponentIsValid_ReturnComponent) {
 	Entity entity;
 
 	MockComponent* expected = new MockComponent(&entity);

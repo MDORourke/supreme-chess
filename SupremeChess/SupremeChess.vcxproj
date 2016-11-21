@@ -130,23 +130,35 @@ lib /NOLOGO /OUT:"$(SolutionDir)SupremeChessTests\lib\SupremeChess.lib" "$(Proje
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Entity.cpp" />
+    <ClCompile Include="src\Board.cpp" />
+    <ClCompile Include="src\BoardBuilder.cpp" />
+    <ClCompile Include="src\BoardController.cpp" />
+    <ClCompile Include="src\BoardTile.cpp" />
+    <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GraphicsSystem.cpp" />
-    <ClCompile Include="src\Grid.cpp" />
-    <ClCompile Include="src\GridSelectionState.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\MoveGenerator.cpp" />
+    <ClCompile Include="src\PlayerInputController.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Component.h" />
-    <ClInclude Include="include\Entity.h" />
-    <ClInclude Include="include\GraphicsComponent.h" />
+    <ClInclude Include="include\Board.h" />
+    <ClInclude Include="include\BoardBuilder.h" />
+    <ClInclude Include="include\BoardController.h" />
+    <ClInclude Include="include\BoardTile.h" />
+    <ClInclude Include="include\ChessPiece.h" />
+    <ClInclude Include="include\ChessPieceType.h" />
+    <ClInclude Include="include\Direction.h" />
+    <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\GraphicsSystem.h" />
-    <ClInclude Include="include\Grid.h" />
-    <ClInclude Include="include\GridComponent.h" />
-    <ClInclude Include="include\GridSelectionState.h" />
     <ClInclude Include="include\impl\SDLCaller.h" />
-    <ClInclude Include="include\PieceComponent.h" />
+    <ClInclude Include="include\Move.h" />
+    <ClInclude Include="include\MoveGenerator.h" />
+    <ClInclude Include="include\PlayerType.h" />
+    <ClInclude Include="include\PlayerInputController.h" />
     <ClInclude Include="include\Vec2D.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
