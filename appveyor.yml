@@ -9,4 +9,7 @@ configuration:
   - Debug
 
 test_script:
-  - cmd: SupremeChessTests\bin\SupremeChessTests.exe
+  - cmd: cd SupremeChessTests\bin
+  - cmd: SupremeChessTests.exe --gtest_output="xml:test_results\test_detail.xml"
+  - ps: $res = New-Object 'System.Net.WebClient'
+  - ps: $res.UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path test_results\test_detail.xml))
