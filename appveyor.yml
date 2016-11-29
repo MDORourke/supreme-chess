@@ -7,4 +7,6 @@ platform:
 
 configuration:
   - Debug
-  - Release
+
+test_script:
+  - cd: dir
