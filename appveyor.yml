@@ -9,4 +9,4 @@ configuration:
   - Debug
 
 test_script:
-  - cmd: dir
+  - cmd: SupremeChessTests\bin\SupremeChessTests.exe
