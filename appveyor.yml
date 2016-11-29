@@ -9,4 +9,4 @@ configuration:
   - Debug
 
 test_script:
-  - cd: dir
+  - cmd: dir
